@@ -3,9 +3,11 @@ const path=require('path')
 const PORT=4444;
 const app=express();
 
-
 const cors=require('cors')
 app.use(cors())
+
+const dotenv=require('dotenv')
+dotenv.config();
 
 const connectDB = require('./db/db');
 connectDB();

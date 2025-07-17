@@ -21,7 +21,7 @@ const Signup = () => {
     e.preventDefault()
     console.log(formData);
 
-    fetch(`http://localhost:4444/signup` , {
+    fetch(`${import.meta.env.VITE_API_BASE_URL}signup` , {
       method:'POST',
       body:JSON.stringify(formData),
       headers:{
@@ -38,6 +38,7 @@ const Signup = () => {
         navigate('/login')
       }
     })
+    .catch(error=>console.error('Error:',error))
 
   }
 

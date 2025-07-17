@@ -27,7 +27,7 @@ const Login = () => {
     e.preventDefault();
     console.log(formData);
 
-    fetch(`http://localhost:4444/login` , {
+    fetch(`${import.meta.env.VITE_API_BASE_URL}login` , {
       method:'POST',
       body:JSON.stringify(formData),
       headers:{
@@ -46,6 +46,7 @@ const Login = () => {
         
       }
     })
+    .catch(error=>console.error('Error:',error))
 
   }
 

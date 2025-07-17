@@ -20,7 +20,6 @@ const App = () => {
     console.log(e.target.value);
     setInputCity(e.target.value);
   };
-
   const celcius = (kelvin) => {
     const celTemp = kelvin - 273.15;
     return Math.round(celTemp);
@@ -41,9 +40,10 @@ const App = () => {
         setHumidity(data.main.humidity);
         setMinTemp(celcius(data.main.temp_min));
         setMaxTemp(celcius(data.main.temp_max));
-      });
+      })
+      .catch(error=>console.error('Error:',error))
 
-      fetch(`http://localhost:4444/history` , {
+      fetch(`${import.meta.env.VITE_API_BASE_URL}history` , {
         method:'POST',
         body:JSON.stringify(
           {
@@ -67,6 +67,7 @@ const App = () => {
       .then(data=>{
         console.log(data);
       })
+      .catch(error=>console.error('Error:',error))
       
   };
 
@@ -90,14 +91,16 @@ const App = () => {
         setHumidity(data.main.humidity);
         setMinTemp(celcius(data.main.temp_min));
         setMaxTemp(celcius(data.main.temp_max));
-      });
+      })
+      .catch(error=>console.error('Error:',error))
 
-    fetch(`http://localhost:4444/history?email=${user}`)
+    fetch(`${import.meta.env.VITE_API_BASE_URL}history?email=${user}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
         setHistorty(data.data);
-      });
+      })
+      .catch(error=>console.error('Error:',error))
   }, []);
 
   return (
@@ -143,9 +146,9 @@ const App = () => {
           </div>
         </div>
 
-        <h2 style={{position:"absolute"}}>Previous Search Record</h2>
+        {history?.length && <h2 style={{position:"absolute"}}>Previous Search Record</h2>}
         <div className=" historyContainer flex">
-          {history.map((e,i) => {
+          {history?.map((e,i) => {
             return (
               <>
                 <div className="history border">
