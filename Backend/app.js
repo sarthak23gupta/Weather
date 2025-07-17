@@ -11,8 +11,10 @@ const connectDB = require('./db/db');
 connectDB();
 
 const router=require('./routers/User.route')
+const historyrouter=require('./routers/History.route')
 app.use(express.json())
 app.use('/',router)
+app.use('/history',historyrouter)
 
 app.listen(PORT,()=>{
     console.log(`http:localhost:`+PORT);

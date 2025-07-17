@@ -6,12 +6,13 @@
 }
 
 .container{
-  border: 2px solid black;
+  /* border: 2px solid black; */
   height: 80vh;
 }
 
 .flex{
   display: flex;
+  
 }
 
 .searchContainer{
@@ -42,4 +43,23 @@
 
 .extraDetails ul{
   list-style: none;
+}
+
+.border{
+  border: 2px solid black;
+}
+
+.historyContainer{
+  height: 30vh;
+  margin-top: 80px;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 20px;
+}
+
+.history{
+  padding-top: 20px;
+  /* height: 30vh; */
+  min-width: 15vw;
+
 }
