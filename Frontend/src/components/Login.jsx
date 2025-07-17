@@ -1,4 +1,8 @@
+import { setupListeners } from '@reduxjs/toolkit/query';
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { setUser } from '../redux/slice/UserSlice';
 // import axios from 'axios';
 
 
@@ -8,6 +12,9 @@ const Login = () => {
     email:'',
     password:''
   })
+
+  const navigate=useNavigate()
+  const dispatch=useDispatch()
 
   const handleChange = (e)=>{
     const value=e.target.value
@@ -30,6 +37,14 @@ const Login = () => {
     .then(response=>response.json())
     .then(data=>{
       console.log(data);
+
+      if(data.success==true)
+      {
+        // localStorage.setItem('user',formData.email)
+        dispatch(setUser(formData.email))
+        navigate('/')
+        
+      }
     })
 
   }
@@ -58,6 +73,8 @@ const Login = () => {
         />
         <button type="submit" style={styles.button}>Login</button>
       </form>
+
+      <p>New User? <span style={{textDecoration:"underline", cursor:'pointer'}} onClick={()=>navigate('/signup')} >SignUp</span> </p>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 // import axios from 'axios';
 
 const Signup = () => {
@@ -31,9 +32,16 @@ const Signup = () => {
     .then(response=>response.json())
     .then(data=>{
       console.log(data);
+
+      if(data.success==true)
+      {
+        navigate('/login')
+      }
     })
 
   }
+
+  const navigate=useNavigate()
   
 
   return (
@@ -69,6 +77,10 @@ const Signup = () => {
         />
         <button type="submit" style={styles.button}>Sign Up</button>
       </form>
+
+
+      <p>Already Account? <span style={{cursor:"pointer" , textDecoration:"underline"}} onClick={()=>navigate('/login')}>Login</span> </p>
+      
     </div>
   );
 };

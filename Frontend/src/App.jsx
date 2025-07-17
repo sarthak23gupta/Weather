@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
+import { useNavigate } from 'react-router'
+import { useSelector } from 'react-redux'
 
 
 const App = () => {
@@ -10,6 +12,8 @@ const App = () => {
   const [minTemp, setMinTemp]=useState('')
   const [maxTemp, setMaxTemp]=useState('')
   const [inputCity, setInputCity]=useState('')
+
+  const user =useSelector((state)=>state.user.value)
 
   const VITE_WeatherAPIKey=import.meta.env.VITE_WeatherAPIKey
 
@@ -22,6 +26,8 @@ const App = () => {
     const celTemp=kelvin-273.15
     return Math.round(celTemp)
   }
+
+  const navigate=useNavigate();
 
   const handleSearch=()=>{
     setLocation(inputCity)
@@ -38,6 +44,16 @@ const App = () => {
   }
 
   useEffect(()=>{
+    if(!user)
+    {
+      navigate('/login')
+    }
+    // if(!localStorage.getItem('user'))
+    // {
+    //   navigate('/login')
+    // }
+
+    
 
      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${VITE_WeatherAPIKey}`)
     .then(response=>response.json())
