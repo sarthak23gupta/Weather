@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 // import './index.css'
 import App from './App.jsx'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router'
-import Login from './components/login.jsx'
+import Login from './components/Login.jsx'
 import Signup from './components/Signup.jsx'
 import Layout from './components/Layout.jsx'
 import { Provider } from 'react-redux'
@@ -26,3 +26,22 @@ createRoot(document.getElementById('root')).render(
     <RouterProvider router={router} />
   </Provider>,
 )
+
+
+gurugam 
+cognizant 
+
+google poay 
+
+25000
+3.5 
+
+
+customer exposure 
+
+why only 
+
+cognizant 
+
+technical 
+
