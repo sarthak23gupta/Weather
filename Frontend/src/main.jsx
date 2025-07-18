@@ -27,21 +27,3 @@ createRoot(document.getElementById('root')).render(
   </Provider>,
 )
 
-
-gurugam 
-cognizant 
-
-google poay 
-
-25000
-3.5 
-
-
-customer exposure 
-
-why only 
-
-cognizant 
-
-technical 
-
