@@ -28,46 +28,62 @@ const App = () => {
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    setLocation(inputCity);
     fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${inputCity}&appid=${VITE_WeatherAPIKey}`
     )
-      .then((response) => response.json())
-      .then((data) => {
-        // console.log(data);
-        // setTempValue(celcius(data.main.temp))
-        setTempValue(celcius(data.main.temp));
-        setHumidity(data.main.humidity);
-        setMinTemp(celcius(data.main.temp_min));
-        setMaxTemp(celcius(data.main.temp_max));
-      })
-      .catch(error=>console.error('Error:',error))
-
-      fetch(`${import.meta.env.VITE_API_BASE_URL}history` , {
-        method:'POST',
-        body:JSON.stringify(
-          {
-            "user":user,
-            "data":[
-                {
+    .then((response) => response.json())
+    .then((data) => {
+      // console.log(data);
+      // setTempValue(celcius(data.main.temp))
+      if(data.cod ==200)
+        {
+          setLocation(inputCity);
+          setTempValue(celcius(data.main.temp));
+          setHumidity(data.main.humidity);
+          setMinTemp(celcius(data.main.temp_min));
+          setMaxTemp(celcius(data.main.temp_max));
+          
+          fetch(`${import.meta.env.VITE_API_BASE_URL}history` , {
+            method:'POST',
+            body:JSON.stringify(
+              {
+                "user":user,
+                "data":[
+                  {
                     "location":inputCity,
                     "temprature":tempValue,
                     "humidity":humidity,
                     "minimum":minTemp,
                     "maximum":maxTemp
-                }
-            ]
-          }
-        ),
-        headers:{
-          'Content-Type':'application/json'
+                  }
+                ]
+              }
+            ),
+            headers:{
+              'Content-Type':'application/json'
+            }
+          })
+          .then(response=>response.json())
+          .then(data=>{
+            console.log(data);
+
+            fetch(`${import.meta.env.VITE_API_BASE_URL}history?email=${user}`)
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data);
+              setHistorty(data.data);
+            })
+            .catch(error=>console.error('Error:',error))
+          })
+
+          .catch(error=>console.error('Error:',error))
         }
-      })
-      .then(response=>response.json())
-      .then(data=>{
-        console.log(data);
+
+
       })
       .catch(error=>console.error('Error:',error))
+
+      
       
   };
 
